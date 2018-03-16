@@ -5,3 +5,4 @@ export { default as isIn } from "./is-in";
 export { default as isOdd } from "./is-odd";
 export { default as isOtherThan } from "./is-other-than";
 export { default as isRequired } from "./is-required";
+export { default as isGreaterThan } from "./is-greater-than";
