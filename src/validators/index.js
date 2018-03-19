@@ -10,3 +10,6 @@ export { default as isNegative } from "./is-negative";
 export { default as isPositive } from "./is-positive";
 export { default as isTrue } from "./is-true";
 export { default as isFalse } from "./is-false";
+export { default as isInRange } from "./is-in-range";
+export { default as isInteger } from "./is-integer";
+export { default as isFloat } from "./is-float";
