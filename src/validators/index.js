@@ -13,3 +13,5 @@ export { default as isFalse } from "./is-false";
 export { default as isInRange } from "./is-in-range";
 export { default as isInteger } from "./is-integer";
 export { default as isFloat } from "./is-float";
+export { default as hasKey } from "./has-key";
+export { default as hasKeys } from "./has-keys";
