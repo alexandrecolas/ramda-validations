@@ -10,18 +10,22 @@
     "test": "NODE_PATH='.' jest"
   },
   "devDependencies": {
-    "babel-core": "^6.26.0",
-    "babel-jest": "^22.2.2",
-    "babel-preset-env": "^1.6.1",
-    "jest": "^22.2.2",
-    "purdy": "^3.0.2"
+    "@babel/cli": "^7.1.5",
+    "@babel/core": "^7.2.0",
+    "@babel/node": "^7.0.0",
+    "@babel/preset-env": "^7.1.6",
+    "babel-core": "^7.0.0-bridge.0",
+    "babel-jest": "^23.6.0",
+    "jest": "^23.6.0",
+    "purdy": "^3.4.1",
+    "regenerator-runtime": "^0.13.1"
   },
   "dependencies": {
     "ramda": "^0.25.0"
   },
   "babel": {
     "presets": [
-      "env"
+      "@babel/preset-env"
     ]
   },
   "jest": {
