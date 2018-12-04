@@ -48,8 +48,6 @@ describe("with object", () => {
     };
 
     const { isValid, errors } = userValidator(user);
-    console.log({ isValid, errors });
-
     expect(isValid).toBe(false);
     expect(errors.name.first).toContainEqual("isStringFailed");
   });
