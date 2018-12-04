@@ -1,4 +1,5 @@
-import { is, curry, isEmpty, flatten } from "ramda";
+import { is, curry, isEmpty, flatten, mapObjIndexed } from "ramda";
+import purdy from "purdy";
 
 /**
  * runValidators
@@ -21,9 +22,24 @@ const runValidators = (validators, value) => {
 /**
  * Validate
  */
-export const validate = curry((validators, value) => {
+export const validate = (...validators) => value => {
   const errors = flatten(runValidators(validators, value));
   return { isValid: isEmpty(errors), errors };
+};
+
+/**
+ * Validates Object
+ */
+export const validates = curry((validators, value) => {
+  let objectIsValid = true;
+
+  const errors = mapObjIndexed((validate, key) => {
+    const { isValid, errors } = validate(value[key]);
+    !isValid && (objectIsValid = false);
+    return errors;
+  })(validators);
+
+  return { isValid: objectIsValid, errors };
 });
 
 export const conditions = (condition, validator) => {

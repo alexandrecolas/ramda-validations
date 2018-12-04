@@ -1,19 +1,9 @@
 import { isObject } from "src/validators";
 
-test("test", () => {
-  const object = {
-    firstname: "Alexandre",
-    lastname: "Colas",
-    address: {
-      street: "246 rue de charenton",
-      zipcode: "75012",
-      city: "Paris"
-    }
-  };
+test("isObject return true if value is an object", () => {
+  expect(isObject({})).toBe(true);
+});
 
-  const validation = isObject({
-    street: validate(isString),
-    zipcode: validate(isString),
-    city: validate(isString)
-  });
+test("isObject return false if value is not an object", () => {
+  expect(isObject(1)).toBe(false);
 });

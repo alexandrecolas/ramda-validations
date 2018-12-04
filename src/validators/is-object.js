@@ -1,9 +1,7 @@
-import { curry } from "ramda";
+import { is } from "ramda";
 
 /**
  * isObject
  */
-const isObject = curry((props, value) => {
-  //
-});
+const isObject = value => is(Object, value);
 export default isObject;
