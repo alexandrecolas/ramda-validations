@@ -1,5 +1,5 @@
-import { validate, conditions } from "src/index";
-import { isInteger, isPositive } from "src/validators";
+import { validate, validates, conditions } from "src/index";
+import { isInteger, isPositive, isString, isRequired } from "src/validators";
 
 test("test", () => {
   const { isValid, errors } = validate(isInteger, isPositive)(1);
@@ -14,8 +14,8 @@ test("return errors object when invalid", () => {
   expect(errors).toContainEqual("isPositiveFailed");
 });
 
-describe("object with conditionals validations", () => {
-  test("return errors object when invalid", () => {
+describe("with conditionals validations", () => {
+  test("return errors when invalid", () => {
     const checkValidations = validate(
       conditions(() => true, [isInteger, isPositive])
     );
@@ -27,23 +27,30 @@ describe("object with conditionals validations", () => {
   });
 });
 
-describe.only("complex object", () => {
+describe("with object", () => {
   test("return errors object when invalid", () => {
-    const userValidations = {
-      title: validate(isString, isRequired);
-      firstname: validate(isString, isRequired);
-      lastname: validate(isString, isRequired);
-      age: validate(isNumber, isPositive, isRequired);
-    }
+    const userValidator = validates({
+      title: validate(isString, isRequired),
+      name: validates({
+        first: validate(isString, isRequired),
+        last: validate(isString, isRequired)
+      }),
+      age: validate(isInteger, isPositive, isRequired)
+    });
 
-    const checkValidations = validate(
-      conditions(() => true, [isInteger, isPositive])
-    );
+    const user = {
+      title: "Master",
+      name: {
+        first: 24,
+        last: "Kenobi"
+      },
+      age: 42
+    };
 
-    const { isValid, errors } = checkValidations("test");
+    const { isValid, errors } = userValidator(user);
+    console.log({ isValid, errors });
 
     expect(isValid).toBe(false);
-    expect(errors).toContainEqual("isIntegerFailed");
-    expect(errors).toContainEqual("isPositiveFailed");
+    expect(errors.name.first).toContainEqual("isStringFailed");
   });
 });
