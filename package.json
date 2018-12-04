@@ -23,5 +23,8 @@
     "presets": [
       "env"
     ]
+  },
+  "jest": {
+    "testEnvironment": "node"
   }
 }
