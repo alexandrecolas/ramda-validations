@@ -1,7 +1,7 @@
 {
-  "name": "diplo-validations",
+  "name": "ramda-validations",
   "version": "0.0.1",
-  "description": "Diplo Validations",
+  "description": "Ramda Validations helpers",
   "main": "index.js",
   "author": "Alexandre Colas <me@colasalexandre.com>",
   "license": "MIT",
