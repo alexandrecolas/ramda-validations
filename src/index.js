@@ -30,6 +30,23 @@ export const validate = (...validators) => value => {
   return { isValid: isEmpty(errors), errors };
 };
 
+/**
+ * Validates
+ * Use validate with validateKeys
+ * @deprecated
+ */
+export const validates = curry((validators, value) => {
+  let objectIsValid = true;
+
+  const errors = mapObjIndexed((validate, key) => {
+    const { isValid, errors } = validate(value[key]);
+    !isValid && (objectIsValid = false);
+    return errors;
+  })(validators);
+
+  return { isValid: objectIsValid, errors };
+});
+
 export const conditions = (condition, validator) => {
   if (condition()) return validator;
 };
