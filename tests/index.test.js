@@ -4,7 +4,8 @@ import {
   isPositive,
   isString,
   isRequired,
-  isObject
+  isObject,
+  isTrue
 } from "src/validators";
 import purdy from "purdy";
 
@@ -26,6 +27,7 @@ describe("with conditionals validations", () => {
     const checkValidations = validate(
       conditions(() => true, [isInteger, isPositive])
     );
+
     const { isValid, errors } = checkValidations("test");
 
     expect(isValid).toBe(false);
@@ -35,17 +37,8 @@ describe("with conditionals validations", () => {
 });
 
 describe("with object", () => {
-  test.only("return errors object when invalid", () => {
-    // const userValidator = validates({
-    //   title: validate(isString, isRequired),
-    //   name: validates({
-    //     first: validate(isString, isRequired),
-    //     last: validate(isString, isRequired)
-    //   }),
-    //   age: validate(isInteger, isPositive, isRequired)
-    // });
-
-    const userValidator = validate(
+  test("return errors object when invalid", () => {
+    const checkValidations = validate(
       isObject,
       validateKeys({
         title: validate(isString, isRequired),
@@ -69,8 +62,9 @@ describe("with object", () => {
       age: 42
     };
 
-    const { isValid, errors } = userValidator(user);
-    expect(isValid).toBe(false);
-    expect(errors[0].name[0].first).toContainEqual("isStringFailed");
+    const result = checkValidations(user);
+
+    expect(result.isValid).toBe(false);
+    expect(result.keys.name.keys.first.errors).toContainEqual("isStringFailed");
   });
 });

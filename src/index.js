@@ -1,33 +1,53 @@
-import { is, curry, isEmpty, flatten, forEachObjIndexed } from "ramda";
+import { is, curry, isEmpty, flatten, forEachObjIndexed, isNil } from "ramda";
 import purdy from "purdy";
-
-/**
- * runValidators
- * @private
- */
-const runValidators = (validators, value) => {
-  let errors = [];
-  validators.forEach(validator => {
-    if (is(Array, validator)) {
-      errors.push(runValidators(validator, value));
-    } else if (validator.name === "condition") {
-      validator(value);
-    } else if (validator.name === "validateObjectKey") {
-      const result = validator(value);
-      if (!result.isValid) errors.push(result.errors);
-    } else {
-      if (validator(value) === false) errors.push(`${validator.name}Failed`);
-    }
-  });
-  return errors;
-};
 
 /**
  * Validate
  */
 export const validate = (...validators) => value => {
-  const errors = flatten(runValidators(validators, value));
-  return { isValid: isEmpty(errors), errors };
+  let result = { errors: [], isValid: true };
+
+  // For all validators of valide, check
+  validators.forEach(validator => {
+    if (validator.name === "validateObjectKey") {
+      const { keys, isValid } = validator(value);
+      if (!isValid) {
+        result.errors.push("validateKeysFailed");
+        result.isValid = false;
+        result.keys = keys;
+      }
+    } else if (validator.name === "validateCondition") {
+      result = validator()(value);
+    } else {
+      if (validator(value) === false) {
+        result.errors.push(`${validator.name}Failed`);
+        result.isValid = false;
+      }
+    }
+  });
+
+  return result;
+};
+
+/**
+ * Validates Object Keys
+ */
+export const validateKeys = objectValidators => {
+  const validateObjectKey = value => {
+    let objectKeys = {};
+    let isObjectValid = true;
+    // For Each key
+    forEachObjIndexed((validateForKey, key) => {
+      const result = validateForKey(value[key]);
+      if (!result.isValid) {
+        objectKeys[key] = result;
+        isObjectValid = false;
+      }
+    })(objectValidators);
+
+    return { keys: objectKeys, isValid: isObjectValid };
+  };
+  return validateObjectKey;
 };
 
 /**
@@ -48,26 +68,7 @@ export const validates = curry((validators, value) => {
 });
 
 export const conditions = (condition, validator) => {
-  if (condition()) return validator;
-};
-
-/**
- * Validates Object Keys
- */
-export const validateKeys = validators => {
-  const validateObjectKey = value => {
-    let objectIsValid = true;
-    let objectErrors = {};
-
-    const errors = forEachObjIndexed((validate, key) => {
-      const { isValid, errors } = validate(value[key]);
-      if (!isValid) {
-        objectIsValid = false;
-        objectErrors[key] = errors;
-      }
-    })(validators);
-
-    return { isValid: objectIsValid, errors: objectErrors };
-  };
-  return validateObjectKey;
+  let validateCondition = () =>
+    is(Array, validator) ? validate(...validator) : validator;
+  if (condition()) return validateCondition;
 };
