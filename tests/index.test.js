@@ -1,5 +1,12 @@
-import { validate, validates, conditions } from "src/index";
-import { isInteger, isPositive, isString, isRequired } from "src/validators";
+import { validate, conditions, validateKeys } from "src/index";
+import {
+  isInteger,
+  isPositive,
+  isString,
+  isRequired,
+  isObject
+} from "src/validators";
+import purdy from "purdy";
 
 test("test", () => {
   const { isValid, errors } = validate(isInteger, isPositive)(1);
@@ -28,15 +35,30 @@ describe("with conditionals validations", () => {
 });
 
 describe("with object", () => {
-  test("return errors object when invalid", () => {
-    const userValidator = validates({
-      title: validate(isString, isRequired),
-      name: validates({
-        first: validate(isString, isRequired),
-        last: validate(isString, isRequired)
-      }),
-      age: validate(isInteger, isPositive, isRequired)
-    });
+  test.only("return errors object when invalid", () => {
+    // const userValidator = validates({
+    //   title: validate(isString, isRequired),
+    //   name: validates({
+    //     first: validate(isString, isRequired),
+    //     last: validate(isString, isRequired)
+    //   }),
+    //   age: validate(isInteger, isPositive, isRequired)
+    // });
+
+    const userValidator = validate(
+      isObject,
+      validateKeys({
+        title: validate(isString, isRequired),
+        name: validate(
+          isObject,
+          validateKeys({
+            first: validate(isString, isRequired),
+            last: validate(isString, isRequired)
+          })
+        ),
+        age: validate(isInteger, isPositive, isRequired)
+      })
+    );
 
     const user = {
       title: "Master",
@@ -49,6 +71,6 @@ describe("with object", () => {
 
     const { isValid, errors } = userValidator(user);
     expect(isValid).toBe(false);
-    expect(errors.name.first).toContainEqual("isStringFailed");
+    expect(errors[0].name[0].first).toContainEqual("isStringFailed");
   });
 });
