@@ -18,3 +18,4 @@ export { default as isFloat } from "./is-float";
 export { default as hasKey } from "./has-key";
 export { default as hasKeys } from "./has-keys";
 export { default as isObject } from "./is-object";
+export { default as isHash } from "./is-hash";
