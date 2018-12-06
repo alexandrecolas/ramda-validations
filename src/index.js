@@ -1,4 +1,5 @@
 import { is, curry, isEmpty, flatten, forEachObjIndexed, isNil } from "ramda";
+import { isHash } from "./validators";
 import purdy from "purdy";
 
 /**
@@ -9,15 +10,14 @@ export const validate = (...validators) => value => {
 
   // For all validators of valide, check
   validators.forEach(validator => {
-    if (isNil(validator)) {
+    if (is(Array, validator)) {
+      result = validate(...validator)(value);
+    } else if (isHash(validator)) {
+      result = validateObject(validator)(value);
+    } else if (isNil(validator)) {
       throw "Validator need to be a function";
     } else if (validator.name === "validateObjectKey") {
-      const { keys, isValid } = validator(value);
-      if (!isValid) {
-        result.errors.push("validateKeysFailed");
-        result.isValid = false;
-        result.keys = keys;
-      }
+      result = validator(value);
     } else if (validator.name === "validateCondition") {
       result = validator()(value);
     } else {
@@ -34,20 +34,32 @@ export const validate = (...validators) => value => {
 /**
  * Validates Object Keys
  */
-export const validateKeys = objectValidators => {
+export const validateObject = objectValidators => {
   const validateObjectKey = value => {
+    if (!isHash(objectValidators)) {
+      return { isValid: false, errors: ["isHashFailed"] };
+    }
+
     let objectKeys = {};
-    let isObjectValid = true;
+    let isHashValid = true;
     // For Each key
     forEachObjIndexed((validateForKey, key) => {
-      const result = validateForKey(value[key]);
+      const result = validate(validateForKey)(value[key]);
       if (!result.isValid) {
         objectKeys[key] = result;
-        isObjectValid = false;
+        isHashValid = false;
       }
     })(objectValidators);
 
-    return { keys: objectKeys, isValid: isObjectValid };
+    if (!isHashValid) {
+      return {
+        keys: objectKeys,
+        isValid: isHashValid,
+        errors: ["validateKeysFailed"]
+      };
+    } else {
+      return { errors: [], isValid: true };
+    }
   };
   return validateObjectKey;
 };
