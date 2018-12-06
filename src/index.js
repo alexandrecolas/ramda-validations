@@ -64,7 +64,7 @@ export const validateObject = objectValidators => {
   return validateObjectKey;
 };
 
-export const conditions = (condition, validator) => {
+export const when = (condition, validator) => {
   let validateCondition = () =>
     is(Array, validator) ? validate(...validator) : validator;
 

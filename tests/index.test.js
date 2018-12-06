@@ -1,4 +1,4 @@
-import { validate, conditions } from "src/index";
+import { validate, when } from "src/index";
 import {
   isInteger,
   isPositive,
@@ -25,7 +25,7 @@ test("return errors object when invalid", () => {
 describe("with conditionals validations", () => {
   test("return errors when invalid", () => {
     const checkValidations = validate(
-      conditions(() => true, [isInteger, isPositive])
+      when(() => true, [isInteger, isPositive])
     );
 
     const { isValid, errors } = checkValidations("test");
@@ -73,7 +73,7 @@ describe("with object and conditional", () => {
           last: [isString, isRequired]
         },
         age: [isInteger, isPositive, isRequired],
-        parentalConsent: conditions(() => user.age < 18, [isRequired, isTrue])
+        parentalConsent: when(() => user.age < 18, [isRequired, isTrue])
       })(user);
     };
 
