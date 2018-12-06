@@ -18,8 +18,8 @@ test("test", () => {
 test("return errors object when invalid", () => {
   const { isValid, errors } = validate(isInteger, isPositive)("test");
   expect(isValid).toBe(false);
-  expect(errors).toContainEqual("isIntegerFailed");
-  expect(errors).toContainEqual("isPositiveFailed");
+  expect(errors).toContainEqual("isNotInteger");
+  expect(errors).toContainEqual("isNotPositive");
 });
 
 describe("with conditionals validations", () => {
@@ -31,8 +31,8 @@ describe("with conditionals validations", () => {
     const { isValid, errors } = checkValidations("test");
 
     expect(isValid).toBe(false);
-    expect(errors).toContainEqual("isIntegerFailed");
-    expect(errors).toContainEqual("isPositiveFailed");
+    expect(errors).toContainEqual("isNotInteger");
+    expect(errors).toContainEqual("isNotPositive");
   });
 });
 
@@ -59,7 +59,7 @@ describe("with object", () => {
     const result = checkValidations(user);
 
     expect(result.isValid).toBe(false);
-    expect(result.keys.name.keys.first.errors).toContainEqual("isStringFailed");
+    expect(result.keys.name.keys.first.errors).toContainEqual("isNotString");
   });
 });
 
@@ -90,6 +90,6 @@ describe("with object and conditional", () => {
     const result = checkValidations(user);
 
     expect(result.isValid).toBe(false);
-    expect(result.keys.parentalConsent.errors).toContainEqual("isTrueFailed");
+    expect(result.keys.parentalConsent.errors).toContainEqual("isNotTrue");
   });
 });

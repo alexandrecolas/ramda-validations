@@ -1,5 +1,6 @@
 import { is, curry, isEmpty, flatten, forEachObjIndexed, isNil } from "ramda";
 import { isHash } from "./validators";
+import { getErrorMessage } from "./utils";
 import purdy from "purdy";
 
 /**
@@ -22,7 +23,7 @@ export const validate = (...validators) => value => {
       result = validator()(value);
     } else {
       if (validator(value) === false) {
-        result.errors.push(`${validator.name}Failed`);
+        result.errors.push(getErrorMessage(validator.name));
         result.isValid = false;
       }
     }
@@ -67,6 +68,5 @@ export const validateObject = objectValidators => {
 export const when = (condition, validator) => {
   let validateCondition = () =>
     is(Array, validator) ? validate(...validator) : validator;
-
   return condition() ? validateCondition : () => true;
 };
