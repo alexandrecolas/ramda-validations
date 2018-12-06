@@ -5,7 +5,7 @@ export { default as isString } from "./is-string";
 export { default as isIn } from "./is-in";
 export { default as isOdd } from "./is-odd";
 export { default as isOtherThan } from "./is-other-than";
-export { default as isRequired } from "./is-required";
+export { default as isPresent } from "./is-present";
 export { default as isBlank } from "./is-blank";
 export { default as isGreaterThan } from "./is-greater-than";
 export { default as isNegative } from "./is-negative";

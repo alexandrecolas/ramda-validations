@@ -3,7 +3,7 @@ import {
   isInteger,
   isPositive,
   isString,
-  isRequired,
+  isPresent,
   isObject,
   isTrue
 } from "src/validators";
@@ -39,12 +39,12 @@ describe("with conditionals validations", () => {
 describe("with object", () => {
   test("return errors object when invalid", () => {
     const checkValidations = validate({
-      title: [isString, isRequired],
+      title: [isString, isPresent],
       name: {
-        first: [isString, isRequired],
-        last: [isString, isRequired]
+        first: [isString, isPresent],
+        last: [isString, isPresent]
       },
-      age: [isInteger, isPositive, isRequired]
+      age: [isInteger, isPositive, isPresent]
     });
 
     const user = {
@@ -67,13 +67,13 @@ describe("with object and conditional", () => {
   test("return errors object when invalid", () => {
     const checkValidations = user => {
       return validate({
-        title: [isString, isRequired],
+        title: [isString, isPresent],
         name: {
-          first: [isString, isRequired],
-          last: [isString, isRequired]
+          first: [isString, isPresent],
+          last: [isString, isPresent]
         },
-        age: [isInteger, isPositive, isRequired],
-        parentalConsent: when(() => user.age < 18, [isRequired, isTrue])
+        age: [isInteger, isPositive, isPresent],
+        parentalConsent: when(() => user.age < 18, [isPresent, isTrue])
       })(user);
     };
 
