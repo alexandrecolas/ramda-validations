@@ -9,7 +9,9 @@ export const validate = (...validators) => value => {
 
   // For all validators of valide, check
   validators.forEach(validator => {
-    if (validator.name === "validateObjectKey") {
+    if (isNil(validator)) {
+      throw "Validator need to be a function";
+    } else if (validator.name === "validateObjectKey") {
       const { keys, isValid } = validator(value);
       if (!isValid) {
         result.errors.push("validateKeysFailed");
@@ -70,5 +72,6 @@ export const validates = curry((validators, value) => {
 export const conditions = (condition, validator) => {
   let validateCondition = () =>
     is(Array, validator) ? validate(...validator) : validator;
-  if (condition()) return validateCondition;
+
+  return condition() ? validateCondition : () => true;
 };
