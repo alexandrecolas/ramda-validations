@@ -1,5 +1,13 @@
-import { validate, validates, conditions } from "src/index";
-import { isInteger, isPositive, isString, isRequired } from "src/validators";
+import { validate, when } from "src/index";
+import {
+  isInteger,
+  isPositive,
+  isString,
+  isPresent,
+  isObject,
+  isTrue
+} from "src/validators";
+import purdy from "purdy";
 
 test("test", () => {
   const { isValid, errors } = validate(isInteger, isPositive)(1);
@@ -10,32 +18,33 @@ test("test", () => {
 test("return errors object when invalid", () => {
   const { isValid, errors } = validate(isInteger, isPositive)("test");
   expect(isValid).toBe(false);
-  expect(errors).toContainEqual("isIntegerFailed");
-  expect(errors).toContainEqual("isPositiveFailed");
+  expect(errors).toContainEqual("isNotInteger");
+  expect(errors).toContainEqual("isNotPositive");
 });
 
 describe("with conditionals validations", () => {
   test("return errors when invalid", () => {
     const checkValidations = validate(
-      conditions(() => true, [isInteger, isPositive])
+      when(() => true, [isInteger, isPositive])
     );
+
     const { isValid, errors } = checkValidations("test");
 
     expect(isValid).toBe(false);
-    expect(errors).toContainEqual("isIntegerFailed");
-    expect(errors).toContainEqual("isPositiveFailed");
+    expect(errors).toContainEqual("isNotInteger");
+    expect(errors).toContainEqual("isNotPositive");
   });
 });
 
 describe("with object", () => {
   test("return errors object when invalid", () => {
-    const userValidator = validates({
-      title: validate(isString, isRequired),
-      name: validates({
-        first: validate(isString, isRequired),
-        last: validate(isString, isRequired)
-      }),
-      age: validate(isInteger, isPositive, isRequired)
+    const checkValidations = validate({
+      title: [isString, isPresent],
+      name: {
+        first: [isString, isPresent],
+        last: [isString, isPresent]
+      },
+      age: [isInteger, isPositive, isPresent]
     });
 
     const user = {
@@ -47,8 +56,40 @@ describe("with object", () => {
       age: 42
     };
 
-    const { isValid, errors } = userValidator(user);
-    expect(isValid).toBe(false);
-    expect(errors.name.first).toContainEqual("isStringFailed");
+    const result = checkValidations(user);
+
+    expect(result.isValid).toBe(false);
+    expect(result.keys.name.keys.first.errors).toContainEqual("isNotString");
+  });
+});
+
+describe("with object and conditional", () => {
+  test("return errors object when invalid", () => {
+    const checkValidations = user => {
+      return validate({
+        title: [isString, isPresent],
+        name: {
+          first: [isString, isPresent],
+          last: [isString, isPresent]
+        },
+        age: [isInteger, isPositive, isPresent],
+        parentalConsent: when(() => user.age < 18, [isPresent, isTrue])
+      })(user);
+    };
+
+    const user = {
+      title: "Master",
+      name: {
+        first: "Obi-Wan",
+        last: "Kenobi"
+      },
+      age: 17,
+      parentalConsent: false
+    };
+
+    const result = checkValidations(user);
+
+    expect(result.isValid).toBe(false);
+    expect(result.keys.parentalConsent.errors).toContainEqual("isNotTrue");
   });
 });
