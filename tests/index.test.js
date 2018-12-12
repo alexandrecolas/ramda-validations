@@ -7,7 +7,6 @@ import {
   isObject,
   isTrue
 } from "src/validators";
-import purdy from "purdy";
 
 test("test", () => {
   const { isValid, errors } = validate(isInteger, isPositive)(1);

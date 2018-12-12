@@ -2,12 +2,18 @@
   "name": "ramda-validations",
   "version": "0.0.1",
   "description": "Ramda Validations helpers",
-  "main": "index.js",
+  "main": "lib/index.js",
+  "files": [
+    "src",
+    "lib"
+  ],
   "author": "Alexandre Colas <me@colasalexandre.com>",
   "license": "MIT",
   "private": true,
   "scripts": {
-    "test": "NODE_PATH='.' jest"
+    "test": "NODE_PATH='.' jest",
+    "build": "rollup -c",
+    "prepare": "npm run build"
   },
   "devDependencies": {
     "@babel/cli": "^7.1.5",
@@ -18,7 +24,10 @@
     "babel-jest": "^23.6.0",
     "jest": "^23.6.0",
     "purdy": "^3.4.1",
-    "regenerator-runtime": "^0.13.1"
+    "regenerator-runtime": "^0.13.1",
+    "rollup": "^0.67.4",
+    "rollup-plugin-babel": "^4.0.3",
+    "rollup-plugin-node-resolve": "^4.0.0"
   },
   "dependencies": {
     "ramda": "^0.26.1"

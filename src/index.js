@@ -1,7 +1,6 @@
 import { is, curry, isEmpty, flatten, forEachObjIndexed, isNil } from "ramda";
-import { isHash } from "./validators";
+import isHash from "./validators/is-hash";
 import { getErrorMessage } from "./utils";
-import purdy from "purdy";
 
 /**
  * Validate
