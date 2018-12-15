@@ -1,4 +1,7 @@
-import { is } from "ramda";
-
-const isInteger = value => is(Number, value) && value % 1 === 0;
+/**
+ * Checks if input value is an integer number
+ * @param {any} input
+ * @return {boolean}
+ */
+const isInteger: { (input: any): boolean } = Number.isInteger;
 export default isInteger;
