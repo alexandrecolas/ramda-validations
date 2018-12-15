@@ -20,3 +20,4 @@ export { default as hasKeys } from "./has-keys";
 export { default as isObject } from "./is-object";
 export { default as isHash } from "./is-hash";
 export { default as isFinite } from "./is-finite";
+export { default as isMultiple } from "./is-multiple";
