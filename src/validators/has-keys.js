@@ -1,8 +1,17 @@
-import { curry, contains, is } from "ramda";
-import hasKey from "./has-key";
+import { curry, includes, map, has, __ } from "ramda";
 
-const hasKeys = curry((keys = [], value) => {
-  if (!is(Object, value)) return false;
-  return !contains(false, keys.map(key => hasKey(key, value)));
-});
+/**
+ * Check if input object has keys
+ * @param {Array<string>} keys
+ * @param {Object} input
+ * @return {boolean}
+ * @exemple
+ *
+ * hasKeys(["a", "b"], {a: 1, b: 2}) // => true
+ * hasKeys(["a", "b"], {a: 1}) // => false
+ */
+const hasKeys: { (keys: Array<string>, input: Object): boolean } = curry(
+  (keys, input) => !includes(false, map(has(__, input))(keys))
+);
+
 export default hasKeys;
