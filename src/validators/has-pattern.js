@@ -1,7 +1,8 @@
-import { curry, test } from "ramda";
+import { test } from "ramda";
 
 /**
  * hasPattern
+ * @deprecated use ramda `test` instead
  */
-const hasPattern = curry((pattern, value) => test(pattern, value));
+const hasPattern = test;
 export default hasPattern;
