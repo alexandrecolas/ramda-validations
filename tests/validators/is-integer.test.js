@@ -1,12 +1,27 @@
 import { isInteger } from "src/validators";
 
-test("isInteger return true if value is an integer", () => {
-  expect(isInteger(5)).toBe(true);
-});
+describe("isInteger", () => {
+  test("return true if input value is an integer number", () => {
+    expect(isInteger(5)).toBe(true);
+  });
 
-test("isInteger return true if value is not an integer", () => {
-  expect(isInteger(10.123)).toBe(false);
-  expect(isInteger("Hello World")).toBe(false);
-  expect(isInteger(true)).toBe(false);
-  expect(isInteger([])).toBe(false);
+  test("return true if input value is an integer number", () => {
+    expect(isInteger(10.0)).toBe(true);
+  });
+
+  test("return false if input value is a float number", () => {
+    expect(isInteger(10.2)).toBe(false);
+  });
+
+  test("return false if input value is a string", () => {
+    expect(isInteger("Hello World")).toBe(false);
+  });
+
+  test("return false if input value is a boolean", () => {
+    expect(isInteger(true)).toBe(false);
+  });
+
+  test("return false if input value is an array", () => {
+    expect(isInteger([])).toBe(false);
+  });
 });
