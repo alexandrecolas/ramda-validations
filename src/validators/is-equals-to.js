@@ -1,7 +1,7 @@
 import { equals } from "ramda";
 
 /**
- * equals
+ * @depecrated use ramba `equals` instead
  */
 const isEqualsTo = equals;
 export default isEqualsTo;
