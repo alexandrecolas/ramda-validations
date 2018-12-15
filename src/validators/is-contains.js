@@ -1,2 +1,6 @@
-import { contains } from "ramda";
-export default contains;
+import { includes } from "ramda";
+
+/**
+ * @depecrated use ramba `includes` instead
+ */
+export default includes;
