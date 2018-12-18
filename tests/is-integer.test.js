@@ -1,4 +1,4 @@
-import { isInteger } from "src/validators";
+import { isInteger } from "src";
 
 describe("isInteger", () => {
   test("return true if input value is an integer number", () => {

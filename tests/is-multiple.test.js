@@ -1,4 +1,4 @@
-import { isMultiple } from "src/validators";
+import { isMultiple } from "src";
 
 describe("isMultiple", () => {
   test("return true if multiple ", () => {

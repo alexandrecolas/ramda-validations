@@ -1,4 +1,4 @@
-import { isBlank } from "src/validators";
+import { isBlank } from "src";
 
 describe("isBlank", () => {
   test("return true if input is empty string", () => {

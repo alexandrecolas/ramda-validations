@@ -1,4 +1,4 @@
-import { isEven } from "src/validators";
+import { isEven } from "src";
 
 describe("isEven", () => {
   test("return true if input is even", () => {

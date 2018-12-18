@@ -1,4 +1,4 @@
-import { isOdd } from "src/validators";
+import { isOdd } from "src";
 
 describe("isOdd", () => {
   test("return true if num is odd", () => {

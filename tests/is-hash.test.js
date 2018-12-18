@@ -1,4 +1,4 @@
-import { isHash } from "src/validators";
+import { isHash } from "src";
 
 test("isHash return true if value is an object", () => {
   expect(isHash({})).toBe(true);

@@ -1,4 +1,4 @@
-import { isFalse } from "src/validators";
+import { isFalse } from "src";
 
 test("isFalse return true if value is false", () => {
   expect(isFalse(false)).toBe(true);
