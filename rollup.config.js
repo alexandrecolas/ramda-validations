@@ -6,23 +6,9 @@ export default [
     input: "src/index.js",
     output: {
       format: "umd",
-      name: "ReactValidations",
-      file: "lib/index.js"
-    },
-    external: ["ramda"],
-    plugins: [
-      resolve(),
-      babel({
-        exclude: "node_modules/**"
-      })
-    ]
-  },
-  {
-    input: "src/validators/index.js",
-    output: {
-      format: "umd",
-      name: "Validator",
-      file: "lib/validators.js"
+      name: "RV",
+      file: "lib/index.js",
+      globals: { ramda: "R" }
     },
     external: ["ramda"],
     plugins: [
@@ -33,18 +19,3 @@ export default [
     ]
   }
 ];
-
-//
-// export default {
-//   input: 'src/main.js',
-//   output: {
-//     file: 'bundle.js',
-//     format: 'cjs'
-//   },
-//   plugins: [
-//     resolve(),
-//     babel({
-//       exclude: 'node_modules/**' // only transpile our source code
-//     })
-//   ]
-// };
