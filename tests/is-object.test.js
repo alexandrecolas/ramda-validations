@@ -1,4 +1,4 @@
-import { isObject } from "src/validators";
+import { isObject } from "src";
 
 test("isObject return true if value is an object", () => {
   expect(isObject({})).toBe(true);

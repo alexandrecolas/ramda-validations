@@ -1,4 +1,4 @@
-import { hasKeys } from "src/validators";
+import { hasKeys } from "src";
 
 test("hasKeys return true if value object contains keys", () => {
   expect(

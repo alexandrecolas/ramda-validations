@@ -1,4 +1,4 @@
-import { isOtherThan } from "src/validators";
+import { isOtherThan } from "src";
 
 describe("isOtherThan", () => {
   test("is true if values aren't equals", () => {

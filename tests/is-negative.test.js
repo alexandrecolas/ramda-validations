@@ -1,4 +1,4 @@
-import { isNegative } from "src/validators";
+import { isNegative } from "src";
 
 test("isNegative return true if num is negative", () => {
   expect(isNegative(-1)).toBe(true);

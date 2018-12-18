@@ -1,71 +1,19 @@
-import { is, curry, isEmpty, flatten, forEachObjIndexed, isNil } from "ramda";
-import isHash from "./validators/is-hash";
-import { getErrorMessage } from "./utils";
-
-/**
- * Validate
- */
-export const validate = (...validators) => value => {
-  let result = { errors: [], isValid: true };
-
-  // For all validators of valide, check
-  validators.forEach(validator => {
-    if (is(Array, validator)) {
-      result = validate(...validator)(value);
-    } else if (isHash(validator)) {
-      result = validateObject(validator)(value);
-    } else if (isNil(validator)) {
-      throw "Validator need to be a function";
-    } else if (validator.name === "validateObjectKey") {
-      result = validator(value);
-    } else if (validator.name === "validateCondition") {
-      result = validator()(value);
-    } else {
-      if (validator(value) === false) {
-        result.errors.push(getErrorMessage(validator.name));
-        result.isValid = false;
-      }
-    }
-  });
-
-  return result;
-};
-
-/**
- * Validates Object Keys
- */
-export const validateObject = objectValidators => {
-  const validateObjectKey = value => {
-    if (!isHash(objectValidators)) {
-      return { isValid: false, errors: ["isHashFailed"] };
-    }
-
-    let objectKeys = {};
-    let isHashValid = true;
-    // For Each key
-    forEachObjIndexed((validateForKey, key) => {
-      const result = validate(validateForKey)(value[key]);
-      if (!result.isValid) {
-        objectKeys[key] = result;
-        isHashValid = false;
-      }
-    })(objectValidators);
-
-    if (!isHashValid) {
-      return {
-        keys: objectKeys,
-        isValid: isHashValid,
-        errors: ["validateKeysFailed"]
-      };
-    } else {
-      return { errors: [], isValid: true };
-    }
-  };
-  return validateObjectKey;
-};
-
-export const when = (condition, validator) => {
-  let validateCondition = () =>
-    is(Array, validator) ? validate(...validator) : validator;
-  return condition() ? validateCondition : () => true;
-};
+export { default as isAlphanum } from "./is-alphanum";
+export { default as isEven } from "./is-even";
+export { default as isString } from "./is-string";
+export { default as isOdd } from "./is-odd";
+export { default as isOtherThan } from "./is-other-than";
+export { default as isPresent } from "./is-present";
+export { default as isBlank } from "./is-blank";
+export { default as isNegative } from "./is-negative";
+export { default as isPositive } from "./is-positive";
+export { default as isTrue } from "./is-true";
+export { default as isFalse } from "./is-false";
+export { default as isInRange } from "./is-in-range";
+export { default as isInteger } from "./is-integer";
+export { default as isFloat } from "./is-float";
+export { default as hasKeys } from "./has-keys";
+export { default as isObject } from "./is-object";
+export { default as isHash } from "./is-hash";
+export { default as isFinite } from "./is-finite";
+export { default as isMultiple } from "./is-multiple";

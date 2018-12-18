@@ -1,4 +1,4 @@
-import { isPresent } from "src/validators";
+import { isPresent } from "src";
 
 describe("isPresent", () => {
   test("is true if values are present", () => {

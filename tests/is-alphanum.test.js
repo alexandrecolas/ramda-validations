@@ -1,4 +1,4 @@
-import { isAlphanum } from "src/validators";
+import { isAlphanum } from "src";
 
 describe("isAlphanum", () => {
   test("is true if only integer", () => {

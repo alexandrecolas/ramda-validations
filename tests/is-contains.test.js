@@ -1,4 +1,4 @@
-import { isInRange } from "src/validators";
+import { isInRange } from "src";
 // TEST
 test("isInRange return true if value is in range", () => {
   const from = 1;

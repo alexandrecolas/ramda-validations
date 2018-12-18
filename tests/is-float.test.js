@@ -1,4 +1,4 @@
-import { isFloat } from "src/validators";
+import { isFloat } from "src";
 
 describe("isFloat", () => {
   test("return true if input value is a float number", () => {
