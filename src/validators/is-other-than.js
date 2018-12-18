@@ -1,4 +1,4 @@
-import { curry, equals } from "ramda";
+import { complement, equals } from "ramda";
 
-const isOtherThan = curry((a, b) => !equals(a, b));
+const isOtherThan = complement(equals);
 export default isOtherThan;
