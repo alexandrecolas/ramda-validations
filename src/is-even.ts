@@ -1,4 +1,3 @@
-import { both } from "ramda";
 import isInteger from "./is-integer";
 
 /**
