@@ -1,7 +1,7 @@
 import { curry, range, includes } from "ramda";
 
 /**
- * Checks if input value is between from and to value
+ * Checks that input value is between from and to value
  * @param {number} from
  * @param {number} to
  * @param {number} input
@@ -14,4 +14,5 @@ import { curry, range, includes } from "ramda";
 const isInRange: { (from: number, to: number, input: number): boolean } = curry(
   (from: number, to: number, input: number) => includes(input, range(from, to))
 );
+
 export default isInRange;

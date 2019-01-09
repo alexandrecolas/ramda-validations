@@ -3,7 +3,7 @@ import isFinite from "./is-finite";
 import isInteger from "./is-integer";
 
 /**
- * Checks if input value is a float number
+ * Checks that input value is a float number
  * @param {any} input
  * @return {boolean}
  * @exemple

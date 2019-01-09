@@ -2,7 +2,7 @@ import { both } from "ramda";
 import isInteger from "./is-integer";
 
 /**
- * Checks if input is even number.
+ * Checks that input is even number.
  * @param {number} input
  * @return {boolean}
  * @exemple

@@ -12,4 +12,5 @@ import { test } from "ramda";
  * isAlphanum("abcd1234567,89") //=> false
  */
 const isAlphanum: { (input: string): boolean } = test(/^[a-zA-Z0-9]*$/);
+
 export default isAlphanum;

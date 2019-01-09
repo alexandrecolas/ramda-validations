@@ -19,4 +19,5 @@ const isBlank = (input: any): boolean => {
   input = is(String, input) ? trim(input) : input;
   return isNil(input) || isEmpty(input);
 };
+
 export default isBlank;

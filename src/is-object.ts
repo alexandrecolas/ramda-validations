@@ -1,7 +1,10 @@
 import { is } from "ramda";
 
 /**
- * isObject
+ * Check that input value is an object
+ * @param {any} input
+ * @return {boolean}
  */
-const isObject = (value: any): boolean => is(Object, value);
+const isObject: { (input: any): boolean } = is(Object);
+
 export default isObject;

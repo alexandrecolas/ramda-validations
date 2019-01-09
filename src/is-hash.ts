@@ -1,5 +1,5 @@
 /**
- * Checks if input value is an object hash
+ * Checks that input value is an object hash
  * @param {any} input
  * @return {boolean}
  * @exemple
@@ -10,4 +10,5 @@
  * isHash(1) //=> false
  */
 const isHash = (input: any): boolean => input.constructor == Object;
+
 export default isHash;

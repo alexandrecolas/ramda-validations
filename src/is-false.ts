@@ -1,7 +1,7 @@
 import { equals } from "ramda";
 
 /**
- * Checks if input value is false
+ * Checks that input value is false
  * @param {any} input
  * @return {boolean}
  * @exemple
@@ -16,4 +16,5 @@ import { equals } from "ramda";
  * isFalse(["Hello", "World"]) //=> false
  */
 const isFalse: { (input: any): boolean } = equals(false);
+
 export default isFalse;
