@@ -29,7 +29,8 @@
     "regenerator-runtime": "^0.13.1",
     "rollup": "^0.67.4",
     "rollup-plugin-babel": "^4.0.3",
-    "rollup-plugin-node-resolve": "^4.0.0"
+    "rollup-plugin-node-resolve": "^4.0.0",
+    "rollup-plugin-uglify": "^6.0.0"
   },
   "dependencies": {
     "ramda": "^0.26.1"
