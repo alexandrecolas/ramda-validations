@@ -2,7 +2,7 @@ import { is } from "ramda";
 
 /**
  * Checks that input value is a string value
- * @param {number} input
+ * @param {any} input
  * @return {boolean}
  *
  * isString("hello") //=> true
