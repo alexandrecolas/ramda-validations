@@ -1,13 +1,21 @@
 {
   "name": "ramda-validations",
   "version": "0.0.1",
-  "description": "Ramda Validations helpers",
+  "description": "Ramda Validations",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/alexandrecolas/ramda-validations.git"
+  },
   "main": "lib/index.js",
+  "bugs": {
+    "url": "https://github.com/alexandrecolas/ramda-validations/issues"
+  },
+  "homepage": "https://github.com/alexandrecolas/ramda-validations#readme",
   "files": [
     "src",
     "lib"
   ],
-  "author": "Alexandre Colas <me@colasalexandre.com>",
+  "author": "Alexandre Colas <colasalexandre@gmail.com>",
   "license": "MIT",
   "private": true,
   "scripts": {
