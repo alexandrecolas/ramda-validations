@@ -17,7 +17,6 @@
   ],
   "author": "Alexandre Colas <colasalexandre@gmail.com>",
   "license": "MIT",
-  "private": true,
   "scripts": {
     "test": "NODE_PATH='.' jest",
     "build": "rollup -c",
