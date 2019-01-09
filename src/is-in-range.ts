@@ -1,7 +1,7 @@
 import { curry, range, includes } from "ramda";
 
 /**
- * Checks that input value is between from and to value
+ * Checks that input value is between from and to value.
  * @param {number} from
  * @param {number} to
  * @param {number} input

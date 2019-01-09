@@ -1,7 +1,7 @@
 import { complement, equals } from "ramda";
 
 /**
- * Check that a value is other than b value.
+ * Checks that a value is other than b value.
  * @param {any} a
  * @param {any} b
  * @return {boolean}

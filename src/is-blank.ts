@@ -1,7 +1,7 @@
 import { isNil, isEmpty, trim, is } from "ramda";
 
 /**
- * Check that input is nil or empty
+ * Checks that input is nil or empty
  * @param {any} input
  * @return {boolean}
  * @exemple

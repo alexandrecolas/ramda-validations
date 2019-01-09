@@ -1,7 +1,7 @@
 import { test } from "ramda";
 
 /**
- * Check that characters of a string are alphanumerics
+ * Checks that characters of a string are alphanumerics
  * @param {string} input
  * @return {boolean}
  * @exemple

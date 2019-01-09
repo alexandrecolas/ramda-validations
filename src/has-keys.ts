@@ -1,7 +1,7 @@
 import { curry, includes, map, has, __ } from "ramda";
 
 /**
- * Check if input object has keys
+ * Checks that input object has keys
  * @param {Array<string>} keys
  * @param {Object} input
  * @return {boolean}
