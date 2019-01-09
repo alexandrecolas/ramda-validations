@@ -1,7 +1,7 @@
 import { isNil, isEmpty, trim, is } from "ramda";
 
 /**
- * Check that input is not nil or empty
+ * Checks that input is nil or empty
  * @param {any} input
  * @return {boolean}
  * @exemple
@@ -15,8 +15,9 @@ import { isNil, isEmpty, trim, is } from "ramda";
  * isBlank(0); //=> false
  * isBlank(false); //=> false
  */
-const isBlank: boolean = (input: any) => {
+const isBlank = (input: any): boolean => {
   input = is(String, input) ? trim(input) : input;
   return isNil(input) || isEmpty(input);
 };
+
 export default isBlank;

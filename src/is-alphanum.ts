@@ -1,7 +1,7 @@
 import { test } from "ramda";
 
 /**
- * Check that characters of a string are alphanumerics
+ * Checks that characters of a string are alphanumerics
  * @param {string} input
  * @return {boolean}
  * @exemple
@@ -12,4 +12,5 @@ import { test } from "ramda";
  * isAlphanum("abcd1234567,89") //=> false
  */
 const isAlphanum: { (input: string): boolean } = test(/^[a-zA-Z0-9]*$/);
+
 export default isAlphanum;

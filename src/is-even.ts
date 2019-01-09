@@ -1,8 +1,7 @@
-import { both } from "ramda";
 import isInteger from "./is-integer";
 
 /**
- * Checks if input is even number.
+ * Checks that input is even number.
  * @param {number} input
  * @return {boolean}
  * @exemple
@@ -12,7 +11,7 @@ import isInteger from "./is-integer";
  * isEven(1) //=> false
  * isEven(2.2) //=> false
  */
-const isEven: boolean = (input: number) => {
+const isEven = (input: number): boolean => {
   return isInteger(input) && (input % 2 === 1 ? false : true);
 };
 
