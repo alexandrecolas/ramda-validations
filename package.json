@@ -12,8 +12,7 @@
   "private": true,
   "scripts": {
     "test": "NODE_PATH='.' jest",
-    "build": "rollup -c",
-    "prepare": "npm run build"
+    "build": "rollup -c"
   },
   "devDependencies": {
     "@babel/cli": "^7.1.5",

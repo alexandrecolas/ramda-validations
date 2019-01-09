@@ -1,9 +1,11 @@
 import resolve from "rollup-plugin-node-resolve";
 import babel from "rollup-plugin-babel";
 
+const extensions = [".ts"];
+
 export default [
   {
-    input: "src/index.js",
+    input: "src/index.ts",
     output: {
       format: "umd",
       name: "RV",
@@ -12,8 +14,9 @@ export default [
     },
     external: ["ramda"],
     plugins: [
-      resolve(),
+      resolve({ extensions }),
       babel({
+        extensions,
         exclude: "node_modules/**"
       })
     ]
