@@ -3,5 +3,5 @@ import { is } from "ramda";
 /**
  * isPromise
  */
-const isPromise = is(Promise);
+const isPromise: { (input: any): boolean } = is(Promise);
 export default isPromise;

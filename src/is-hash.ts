@@ -9,5 +9,5 @@
  * isHash(func) //=> false
  * isHash(1) //=> false
  */
-const isHash = input => input.constructor == Object;
+const isHash = (input: any): boolean => input.constructor == Object;
 export default isHash;

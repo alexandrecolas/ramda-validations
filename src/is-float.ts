@@ -15,9 +15,6 @@ import isInteger from "./is-integer";
  * isFloat(true) //=> false
  * isFloat([]) //=> false
  */
-const isFloat: { (input: any): boolean } = both(
-  isFinite,
-  complement(isInteger)
-);
+const isFloat: (input: any) => boolean = both(isFinite, complement(isInteger));
 
 export default isFloat;

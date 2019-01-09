@@ -12,7 +12,7 @@ import isInteger from "./is-integer";
  * isEven(1) //=> false
  * isEven(2.2) //=> false
  */
-const isEven: boolean = (input: number) => {
+const isEven = (input: number): boolean => {
   return isInteger(input) && (input % 2 === 1 ? false : true);
 };
 

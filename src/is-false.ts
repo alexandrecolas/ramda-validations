@@ -1,3 +1,5 @@
+import { equals } from "ramda";
+
 /**
  * Checks if input value is false
  * @param {any} input
@@ -13,5 +15,5 @@
  * isFalse(123456) //=> false
  * isFalse(["Hello", "World"]) //=> false
  */
-const isFalse: boolean = (input: any) => input === false;
+const isFalse: { (input: any): boolean } = equals(false);
 export default isFalse;

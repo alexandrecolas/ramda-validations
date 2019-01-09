@@ -20,9 +20,11 @@
     "@babel/core": "^7.2.0",
     "@babel/node": "^7.0.0",
     "@babel/preset-env": "^7.1.6",
-    "@babel/preset-flow": "^7.0.0",
+    "@babel/preset-typescript": "^7.1.0",
+    "@types/ramda": "^0.25.46",
     "babel-core": "^7.0.0-bridge.0",
     "babel-jest": "^23.6.0",
+    "babel-plugin-module-resolver": "^3.1.1",
     "jest": "^23.6.0",
     "purdy": "^3.4.1",
     "regenerator-runtime": "^0.13.1",
@@ -36,10 +38,35 @@
   "babel": {
     "presets": [
       "@babel/preset-env",
-      "@babel/preset-flow"
+      "@babel/preset-typescript"
+    ],
+    "plugins": [
+      [
+        "module-resolver",
+        {
+          "extensions": [
+            ".jsx",
+            ".ts"
+          ],
+          "root": [
+            "./src"
+          ]
+        }
+      ]
     ]
   },
   "jest": {
-    "testEnvironment": "node"
+    "testEnvironment": "node",
+    "moduleDirectories": [
+      "./node_modules",
+      "./src"
+    ],
+    "moduleFileExtensions": [
+      "ts",
+      "js"
+    ],
+    "transform": {
+      "^.+\\.(js|ts)$": "babel-jest"
+    }
   }
 }
