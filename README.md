@@ -153,7 +153,7 @@ isInRange(1, 8, 10); //=> false
 
 ## String
 
-- **isAlphanum**:.
+- **isAlphanum**: Checks that characters of a string are alphanumerics.
 
 ```typescript
 isAlphanum(input: any): boolean;
@@ -165,7 +165,7 @@ isAlphanum("abcd123456789"); //=> true
 isAlphanum("abcd1234567,89"); //=> false
 ```
 
-- **isString**:.
+- **isString**: Checks that input value is a string value.
 
 ```typescript
 isString(input: any): boolean;
@@ -193,7 +193,7 @@ isTrue(123456); //=> false
 isTrue(["Hello", "World"]); //=> false
 ```
 
-- **isFalse**:.
+- **isFalse**: Checks that input value is false.
 
 ```typescript
 isFalse(input: any): boolean;
